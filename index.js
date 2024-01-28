@@ -22,9 +22,10 @@ let data = [
 app.use(express.json());
 app.use(express.static('public'));
 
+//--------------------------------------Inicio Get-------------------------------------//
 
-// GET Data
-app.length('/data',(req,res) => {
+// GET all data
+app.get('/data', (req, res) => {
     res.json(data);
 });
 
@@ -40,9 +41,9 @@ app.get('/personaje/:id', (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`El servidor se está ejecutando en el puerto ${port}`);
-});
+//--------------------------------------Fin Get-------------------------------------//
+
+//--------------------------------------Inicio Put-------------------------------------//
 
 // PUT update data by id
 app.put('/data/:id', (req, res) => {
@@ -53,6 +54,7 @@ app.put('/data/:id', (req, res) => {
     res.json(item);
 });
 
+//--------------------------------------Fin Put-------------------------------------//
 
 app.listen(port, () => {
     console.log(`Server is running in http://localhost:${port}`);
