@@ -22,22 +22,31 @@ app.use(express.static('public'));
         res.json(item);
     });
 
-    //delete data por id
-    app.delete('/data/:id',(req, res)=>{
-        const itemId = parseInt(req.params.id);
-        data=data.filter(item =>item.id !== itemId)
-        res.send("Datos con el id ${itemId} han sido eliminados");
+    // delete por datos por id 
+    app.delete('/data/:id', (req, res) => {
+        const id = parseInt(req.params.id);
+        const index = data.findIndex(item => item.id === id);
+
+        if (index !== -1) {
+            data.splice(index, 1);
+            res.json({ message: 'Datos eliminados correctamente' });
+        } else {
+            res.status(404).json({ error: 'Datos no encontrados' });
+        }
     });
 
-    //delete data por nombre
-    app.delete('/data/name/:name',(req, res)=>{
-        const itemName = req.params.name; 
-        if (!itemName) return res.status(400).send('Parámetros invalidos');
+    // delete personaje por id
+    app.delete('/personaje/:id', (req, res) => {
+        const id = parseInt(req.params.id);
+        const index = data.findIndex(item => item.id === id);
 
-        data = data.filter(item => item.name !== itemName);
-        res.send("Datos con el nombre ${itemName} han sido eliminados")
+        if (index !== -1) {
+            data.splice(index, 1);
+            res.json({ message: 'Personaje eliminado correctamente' });
+        } else {
+            res.status(404).json({ error: 'Personaje no encontrado' });
+        }
     });
-
 
 
     app.listen(port, () => {
