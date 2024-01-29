@@ -12,7 +12,11 @@ let data = [
 app.use(express.json());
 app.use(express.static('public'));
 
+<<<<<<< Updated upstream
 
+=======
+server.put("/:valor", (req,res) =>{
+>>>>>>> Stashed changes
 
 // PUT update data by id
 app.put('/data/:id', (req, res) => {
