@@ -13,7 +13,6 @@ app.use(express.json());
 app.use(express.static('public'));
 
 
-
     // PUT update data by id
     app.put('/data/:id', (req, res) => {
         const item = data.find(i => i.id === parseInt(req.params.id));
