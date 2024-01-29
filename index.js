@@ -24,30 +24,22 @@ app.use(express.static('public'));
 
     // delete por datos por id 
     app.delete('/data/:id', (req, res) => {
-        const id = parseInt(req.params.id);
-        const index = data.findIndex(item => item.id === id);
-
-        if (index !== -1) {
-            data.splice(index, 1);
-            res.json({ message: 'Datos eliminados correctamente' });
-        } else {
-            res.status(404).json({ error: 'Datos no encontrados' });
-        }
+        const itemId = parseInt(req.params.id);
+        data = data.filter (item => item.id !== itemId)
+        res.send('Los datos con el id ${itemId} han sido eliminados')
     });
 
-    // delete personaje por id
-    app.delete('/personaje/:id', (req, res) => {
-        const id = parseInt(req.params.id);
-        const index = data.findIndex(item => item.id === id);
-
-        if (index !== -1) {
-            data.splice(index, 1);
-            res.json({ message: 'Personaje eliminado correctamente' });
-        } else {
-            res.status(404).json({ error: 'Personaje no encontrado' });
+    // delete personaje por nombre
+    app.delete('/personaje/:name', (req, res) => {  const name = req.params.name;
+        const index = data.findIndex(item => item.name.toLowerCase() === name.toLowerCase());
+    
+        if (index === -1) {
+            return res.status(404).json({ error: 'Personaje no encontrado' });
         }
+    
+        data.splice(index, 1);
+        res.json({ message: 'Personaje eliminado exitosamente' });
     });
-
 
     app.listen(port, () => {
     console.log('Server is running in http://localhost:${port}');
