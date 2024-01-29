@@ -27,7 +27,12 @@ app.put('/data/:id', (req, res) => {
     res.json(item);
 });
 
-
+//delete data por id
+app.delete('/data/:id',(req, res)=>{
+    const itemId = parseInt(req.params.id);
+    data=data.filter(item =>item.id !== itemId)
+    res.send("Datos con el id ${itemId} han sido eliminados");
+});
 app.listen(port, () => {
     console.log(`Server is running in http://localhost:${port}`);
 });
