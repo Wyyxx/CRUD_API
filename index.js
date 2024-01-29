@@ -33,6 +33,18 @@ app.delete('/data/:id',(req, res)=>{
     data=data.filter(item =>item.id !== itemId)
     res.send("Datos con el id ${itemId} han sido eliminados");
 });
+
+//delete data por nombre
+app.delete('/data/:name',(req, res)=>{
+    const itemName = req.params.name; 
+    if (!itemName) return res.status(400).send('Parámetros invalidos');
+
+    data = data.filter(item => item.name !== itemName);
+    res.send("Datos con el nombre ${itemName} han sido eliminados")
+});
+
+
+
 app.listen(port, () => {
     console.log(`Server is running in http://localhost:${port}`);
 });
